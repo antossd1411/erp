@@ -218,10 +218,11 @@ CREATE OR REPLACE TABLE `nav_links`
 	link VARCHAR(50) NOT NULL COMMENT 'Name or tag of the link.',
 	route VARCHAR(50) NOT NULL,
 	icon VARCHAR(250) NULL DEFAULT NULL COMMENT 'Link Icon.',
+	is_active TINYINT(1) NOT NULL DEFAULT 1,
 	creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	modification_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 )
-COMMENT 'This table stores the avaiable links to navigate in the system.';
+COMMENT 'This table stores the available links to navigate in the system.';
 
 INSERT INTO `nav_links`
 	(link, route)
@@ -234,4 +235,57 @@ VALUES
 
 /*
 	END NAV BAR MANAGEMENT
+*/
+
+/*
+	TABLE MANAGEMENT
+*/
+
+CREATE OR REPLACE TABLE `columns`
+(
+	id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	`column` VARCHAR(50) NOT NULL,
+	`key` VARCHAR(50) NOT NULL COMMENT 'The object key associated to the column. Ex.: name: Name',
+	creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	modification_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+)
+COMMENT 'This table stores all the columns that can be found in all modules info tables.';
+
+INSERT INTO `columns`
+	(`column`, `key`)
+VALUES
+	('Name', 'first_name'),
+	('Lastname', 'last_name'),
+	('DNI', 'dni'),
+	('Birthdate', 'birthdate'),
+	('Email', 'email'),
+	('Created by', 'user_id'),
+	('Creation date', 'creation_date');
+
+CREATE OR REPLACE TABLE `columns_modules`
+(
+	id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	module_id INT(11) NOT NULL COMMENT 'Nav link Id.',
+	column_id INT(11) NOT NULL,
+	is_active TINYINT(1) NOT NULL DEFAULT 1,
+	creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	modification_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT fk_nav_id FOREIGN KEY (module_id) REFERENCES `nav_links` (id),
+	CONSTRAINT fk_column_id FOREIGN KEY (column_id) REFERENCES `columns` (id)
+)
+COMMENT 'This table stores the relations between the modules and the columns of their respective tables.';
+
+INSERT INTO `columns_modules`
+	(module_id, column_id)
+VALUES
+	(2, 1),
+	(2, 2),
+	(2, 3),
+	(2, 4),
+	(2, 5),
+	(2, 6),
+	(2, 7);
+
+/*
+	END TABLE MANAGEMENT
 */
