@@ -4,11 +4,7 @@ interface Props {
 
 export default function NavButton({ onClick }: Props) {
   return (
-    <button
-      type="button"
-      className="border border-slate-500 p-1 rounded"
-      onClick={() => onClick()}
-    >
+    <button type="button" className="btn" onClick={() => onClick()}>
       Nav
     </button>
   );

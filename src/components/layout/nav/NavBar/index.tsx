@@ -49,7 +49,7 @@ export default function NavBar({ active, items, error, onClickClose }: Props) {
               </ul>
               <button
                 type="button"
-                className="bg-slate-50 px-2 py-1 border rounded"
+                className="btn"
                 onClick={() => handleLogOut()}
               >
                 Log out

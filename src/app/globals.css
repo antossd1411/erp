@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Layers */
+@layer components {
+  .btn {
+    @apply bg-slate-200 border rounded py-1 px-4;
+  }
+}
+/* End Layers */
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

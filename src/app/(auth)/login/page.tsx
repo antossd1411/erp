@@ -28,11 +28,7 @@ export default function Home() {
           placeholder="Password..."
           className="border rounded p-1 w-full mb-2 outline-none"
         />
-        <input
-          type="submit"
-          value="Go!"
-          className="bg-slate-200 border rounded py-1 px-4"
-        />
+        <input type="submit" value="Go!" className="btn" />
         {message && <p>{message}</p>}
       </form>
     </main>
